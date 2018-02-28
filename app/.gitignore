@@ -1,0 +1,5 @@
+/build
+.gradle/
+.idea/vcs.xml
+*.iml
+local.properties
