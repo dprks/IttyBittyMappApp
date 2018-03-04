@@ -25,8 +25,8 @@ android {
         def googlePlacesApiKeyDev = stringValue("AIzaSyCj-p-x1jeRo-f0VrmdiHIHy53TefCqNvo")
         def googlePlacesApiKeyRelease = stringValue("AIzaSyCj-p-x1jeRo-f0VrmdiHIHy53TefCqNvo")
 
-        def mapboxApiKeyDev = stringValue("")
-        def mapboxApiKeyRelease = stringValue("")
+        def mapboxApiKeyDev = stringValue("pk.eyJ1IjoiZHBya3MiLCJhIjoiY2pjcGg4b3NtMmptbjJ3cm43YjJmcGRnbiJ9.8Og30lXZtjYhuhFPMgzMfQ")
+        def mapboxApiKeyRelease = stringValue("pk.eyJ1IjoiZHBya3MiLCJhIjoiY2pjcGg4b3NtMmptbjJ3cm43YjJmcGRnbiJ9.8Og30lXZtjYhuhFPMgzMfQ")
 
         release {
             buildConfigField "String", "GOOGLE_PLACES_API_KEY", googlePlacesApiKeyRelease
@@ -58,6 +58,7 @@ dependencies {
 
     //Support library
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support.constraint:constraint-layout:1.0.2"
 
     //Test
