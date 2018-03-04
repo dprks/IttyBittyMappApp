@@ -6,6 +6,11 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -17,9 +22,25 @@ android {
     }
 
     buildTypes {
+        def googlePlacesApiKeyDev = stringValue("AIzaSyCj-p-x1jeRo-f0VrmdiHIHy53TefCqNvo")
+        def googlePlacesApiKeyRelease = stringValue("AIzaSyCj-p-x1jeRo-f0VrmdiHIHy53TefCqNvo")
+
+        def mapboxApiKeyDev = stringValue("")
+        def mapboxApiKeyRelease = stringValue("")
+
         release {
+            buildConfigField "String", "GOOGLE_PLACES_API_KEY", googlePlacesApiKeyRelease
+            buildConfigField "String", "MAPBOX_API_KEY", mapboxApiKeyRelease
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            buildConfigField "String", "GOOGLE_PLACES_API_KEY", googlePlacesApiKeyDev
+            buildConfigField "String", "MAPBOX_API_KEY", mapboxApiKeyDev
+
+            minifyEnabled false
         }
     }
 
@@ -41,6 +62,7 @@ dependencies {
 
     //Test
     testImplementation "junit:junit:4.12"
+    testImplementation 'org.mockito:mockito-core:2.7.22'
     androidTestImplementation "com.android.support.test:runner:1.0.1"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.1"
 
@@ -66,3 +88,8 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"
 }
+
+static def stringValue(string) {
+    return "\"$string\""
+}
+

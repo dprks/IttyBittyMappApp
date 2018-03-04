@@ -1,7 +1,5 @@
 package au.com.parkinson.dan.ittybittymappapp.data;
 
-import java.util.List;
-
 import javax.inject.Singleton;
 
 import au.com.parkinson.dan.ittybittymappapp.data.network.NetModule;
@@ -14,7 +12,7 @@ import dagger.Component;
  * Created by dan on 3/03/2018.
  */
 @Singleton
-@Component(modules = {PlacesAPIModule.class, NetModule.class})
+@Component(modules = {PlacesAPIModule.class, NetModule.class, PlacesRepositoryModule.class})
 public interface PlacesRepositoryComponent {
 
     PlacesRepository getPlacesRepository();
