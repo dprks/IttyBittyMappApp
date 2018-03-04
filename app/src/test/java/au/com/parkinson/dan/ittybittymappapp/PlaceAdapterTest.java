@@ -25,6 +25,8 @@ public class PlaceAdapterTest {
 
     Result inputPlace;
     Result nullInput;
+    Result nullLocationPlace;
+
     PlaceAdapter<Result> placeAdapter;
 
     @Before
@@ -33,6 +35,7 @@ public class PlaceAdapterTest {
 
         Gson gson = new Gson();
         inputPlace = gson.fromJson(SampleJSON.getSinglePlaceJSON(), Result.class);
+        nullLocationPlace = gson.fromJson(SampleJSON.getSinglePlaceNullLocationJSON(), Result.class);
     }
 
     @Test
@@ -47,6 +50,12 @@ public class PlaceAdapterTest {
     @Test
     public void testConversionWithNull() {
         Place outputPlace = placeAdapter.convert(nullInput);
+        assertNull(outputPlace);
+    }
+
+    @Test
+    public void testConversionWithNullLocation() {
+        Place outputPlace = placeAdapter.convert(nullLocationPlace);
         assertNull(outputPlace);
     }
 

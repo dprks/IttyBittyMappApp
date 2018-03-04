@@ -11,10 +11,14 @@ import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 
 public class GooglePlaceAdapter implements PlaceAdapter<Result> {
 
+    /**
+     * @param input google api place result
+     * @return Place, or null if input is null or location is null
+     */
     public Place convert(Result input) {
 
         //if place is null, or if location is null, return null
-        if (input == null || input.getGeometry() == null && input.getGeometry().getLocation() == null) {
+        if (input == null || input.getGeometry() == null || input.getGeometry().getLocation() == null) {
             return null;
         }
 

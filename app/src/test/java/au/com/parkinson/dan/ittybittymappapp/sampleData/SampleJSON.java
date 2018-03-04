@@ -42,6 +42,39 @@ public class SampleJSON {
                 "\t}";
     }
 
+    public static String getSinglePlaceNullLocationJSON() {
+        return "{\n" +
+                "\t\t\"geometry\": {\n" +
+                "\t\t\t\"location\": null,\n" +
+                "\t\t\t\"viewport\": {\n" +
+                "\t\t\t\t\"northeast\": {\n" +
+                "\t\t\t\t\t\"lat\": -37.5112737,\n" +
+                "\t\t\t\t\t\"lng\": 145.5125288\n" +
+                "\t\t\t\t},\n" +
+                "\t\t\t\t\"southwest\": {\n" +
+                "\t\t\t\t\t\"lat\": -38.4338593,\n" +
+                "\t\t\t\t\t\"lng\": 144.5937418\n" +
+                "\t\t\t\t}\n" +
+                "\t\t\t}\n" +
+                "\t\t},\n" +
+                "\t\t\"icon\": \"https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png\",\n" +
+                "\t\t\"id\": \"e52b9331affbeac8eaae6da1c168d49708ba7c36\",\n" +
+                "\t\t\"name\": \"Melbourne\",\n" +
+                "\t\t\"photos\": [{\n" +
+                "\t\t\t\"height\": 666,\n" +
+                "\t\t\t\"html_attributions\": [\n" +
+                "\t\t\t\t\"\\u003ca href=\\\"https://maps.google.com/maps/contrib/114294844354659792927/photos\\\"\\u003eYannick Bouvard\\u003c/a\\u003e\"],\n" +
+                "\t\t\t\"photo_reference\": \"CmRaAAAAQFi3rK9punhs0I6-1xtkvxCxN_PRf7ATc28M7KqFvCQ9hH9uIUkRnC6RS6GSnSLoL_enh2clG7d1i0yFb5e_ROJXcnTGLohCDk7pGgLS0p35TryK4vPszAJes7r0iqhxEhCimFm46ExzV9ioGVMmN15WGhSLJmv6eIS7PQIxnau439-uOhRIBA\",\n" +
+                "\t\t\t\"width\": 1000\n" +
+                "\t\t}],\n" +
+                "\t\t\"place_id\": \"ChIJ90260rVG1moRkM2MIXVWBAQ\",\n" +
+                "\t\t\"reference\": \"CmRbAAAACzOZVu3CW2C5ApF8icjNGke2MPwUa_TYDb6x4HnLLsBFFWHTmvHhGUHu7C4bSbHLTu4Ny31exnn2R8uOTp7ct7d2xeMbLJJqwgCpxGyE95Dip9O3YW20Pe9kUq0UCz2yEhDwiAqHME9XljZ3z8c247ypGhRGbhkG6_hBWCrYbdGynAV2QQ2VdA\",\n" +
+                "\t\t\"scope\": \"GOOGLE\",\n" +
+                "\t\t\"types\": [\"colloquial_area\", \"locality\", \"political\"],\n" +
+                "\t\t\"vicinity\": \"Melbourne\"\n" +
+                "\t}";
+    }
+
     public static String getPlacesJSON() {
         return "{\n" +
                 "  \"html_attributions\": [],\n" +
