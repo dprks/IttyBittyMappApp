@@ -16,6 +16,8 @@ import retrofit2.http.Query;
 
 public interface PlacesApi {
 
+    String BASE_URL = "https://maps.googleapis.com/maps/api/";
+
     @GET("place/nearbysearch/json")
     Observable<PlaceSearchResults> getPlacesByLocation(@Query("location") String location, @Query("radius") int radius, @Query("key") String apiKey);
 

@@ -6,6 +6,7 @@ import au.com.parkinson.dan.ittybittymappapp.data.DaggerPlacesRepositoryComponen
 import au.com.parkinson.dan.ittybittymappapp.data.PlacesRepositoryComponent;
 import au.com.parkinson.dan.ittybittymappapp.data.network.NetModule;
 import au.com.parkinson.dan.ittybittymappapp.data.network.PlacesAPIModule;
+import au.com.parkinson.dan.ittybittymappapp.data.network.api.PlacesApi;
 
 /**
  * Created by dan on 3/03/2018.
@@ -19,7 +20,7 @@ public class MapApplication extends Application {
         super.onCreate();
 
         repositoryComponent = DaggerPlacesRepositoryComponent.builder()
-                .netModule(new NetModule("https://maps.googleapis.com/maps/api/"))
+                .netModule(new NetModule(PlacesApi.BASE_URL))
                 .placesAPIModule(new PlacesAPIModule())
                 .build();
     }
