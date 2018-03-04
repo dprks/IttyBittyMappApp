@@ -2,7 +2,6 @@ package au.com.parkinson.dan.ittybittymappapp.ui.map;
 
 import java.util.List;
 
-import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.PlaceSearchResults;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 import au.com.parkinson.dan.ittybittymappapp.ui.presentation.BasePresenter;
 import au.com.parkinson.dan.ittybittymappapp.ui.presentation.BaseView;
@@ -16,7 +15,7 @@ public interface MapContract {
 
   interface View extends BaseView {
 
-    void showPointsOfInterest(PlaceSearchResults pointsOfInterest);
+    void showPointsOfInterest(List<Place> pointsToAdd);
 
     void showPointOfInterestDetails(Place pointOfInterest);
 
