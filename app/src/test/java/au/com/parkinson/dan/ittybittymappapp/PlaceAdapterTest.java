@@ -19,10 +19,12 @@ import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 import au.com.parkinson.dan.ittybittymappapp.sampleData.SampleJSON;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
 
 public class PlaceAdapterTest {
 
     Result inputPlace;
+    Result nullInput;
     PlaceAdapter<Result> placeAdapter;
 
     @Before
@@ -44,7 +46,8 @@ public class PlaceAdapterTest {
 
     @Test
     public void testConversionWithNull() {
-
+        Place outputPlace = placeAdapter.convert(nullInput);
+        assertNull(outputPlace);
     }
 
 
