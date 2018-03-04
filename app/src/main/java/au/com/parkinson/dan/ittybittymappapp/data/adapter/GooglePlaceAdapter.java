@@ -1,5 +1,7 @@
 package au.com.parkinson.dan.ittybittymappapp.data.adapter;
 
+import javax.inject.Inject;
+
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.Result;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 
@@ -10,6 +12,9 @@ import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
  */
 
 public class GooglePlaceAdapter implements PlaceAdapter<Result> {
+
+    @Inject
+    public GooglePlaceAdapter(){}
 
     /**
      * @param input google api place result

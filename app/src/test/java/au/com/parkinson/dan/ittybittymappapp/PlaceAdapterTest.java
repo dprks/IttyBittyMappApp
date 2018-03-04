@@ -9,11 +9,8 @@ import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import au.com.parkinson.dan.ittybittymappapp.data.adapter.GooglePlaceAdapter;
 import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceAdapter;
-import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.PlaceSearchResults;
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.Result;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 import au.com.parkinson.dan.ittybittymappapp.sampleData.SampleJSON;
@@ -23,11 +20,11 @@ import static junit.framework.Assert.assertNull;
 
 public class PlaceAdapterTest {
 
-    Result inputPlace;
-    Result nullInput;
-    Result nullLocationPlace;
+    private Result inputPlace;
+    private Result nullInput;
+    private Result nullLocationPlace;
 
-    PlaceAdapter<Result> placeAdapter;
+    private PlaceAdapter<Result> placeAdapter;
 
     @Before
     public void setup() {
