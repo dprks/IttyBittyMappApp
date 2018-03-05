@@ -1,11 +1,13 @@
 package au.com.parkinson.dan.ittybittymappapp.data;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import au.com.parkinson.dan.ittybittymappapp.data.network.api.PlacesApi;
-import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.PlaceSearchResults;
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.placeDetails.PlaceDetailsResults;
+import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 import io.reactivex.Observable;
 
 /**
@@ -19,15 +21,17 @@ public class PlacesRepository {
 
     private PlacesApi api;
     private String apiKey;
+    private PlaceResultsTransformer placeTransformer;
 
     @Inject
-    public PlacesRepository(PlacesApi api, String apiKey){
+    public PlacesRepository(PlacesApi api, String apiKey, PlaceResultsTransformer placeTransformer){
         this.api = api;
         this.apiKey = apiKey;
+        this.placeTransformer = placeTransformer;
     }
 
-    public Observable<PlaceSearchResults> getPlacesByLocation(String location, int radius) {
-        return api.getPlacesByLocation(location, radius, apiKey);
+    public Observable<List<Place>> getPlacesByLocation(String location, int radius) {
+        return api.getPlacesByLocation(location, radius, apiKey).map(placeTransformer);
     }
 
     public Observable<PlaceDetailsResults> getPlaceDetails(String placeId) {

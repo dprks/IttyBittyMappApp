@@ -1,5 +1,7 @@
 package au.com.parkinson.dan.ittybittymappapp.data;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class PlaceResultsTransformer implements Function<PlaceSearchResults, Lis
     private GooglePlaceAdapter placeAdapter;
 
     @Inject
-    public PlaceResultsTransformer(GooglePlaceAdapter placeAdapter) {
+    public PlaceResultsTransformer(@NonNull GooglePlaceAdapter placeAdapter) {
         this.placeAdapter = placeAdapter;
     }
 

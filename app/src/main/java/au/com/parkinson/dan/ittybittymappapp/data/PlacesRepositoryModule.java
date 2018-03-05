@@ -22,7 +22,7 @@ public class PlacesRepositoryModule {
 
     @Provides
     @Singleton
-    PlacesRepository provideRepository(PlacesApi api) {
-        return new PlacesRepository(api, apiKey);
+    PlacesRepository provideRepository(PlacesApi api, PlaceResultsTransformer placeResultsTransformer) {
+        return new PlacesRepository(api, apiKey, placeResultsTransformer);
     }
 }

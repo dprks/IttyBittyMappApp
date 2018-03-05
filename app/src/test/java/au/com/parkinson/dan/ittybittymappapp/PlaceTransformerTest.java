@@ -21,8 +21,8 @@ import static junit.framework.Assert.assertEquals;
 
 public class PlaceTransformerTest {
 
-    PlaceResultsTransformer placeResultsTransformer;
-    PlaceSearchResults inputPlaces;
+    private PlaceResultsTransformer placeResultsTransformer;
+    private PlaceSearchResults inputPlaces;
 
     @Before
     public void setup() {
@@ -34,10 +34,24 @@ public class PlaceTransformerTest {
     }
 
     @Test
-    public void testConversion() throws Exception {
+    public void testConversionOutputSize() throws Exception {
         List<Place> outputPlaces = placeResultsTransformer.apply(inputPlaces);
         assertEquals(20, outputPlaces.size());
+    }
 
+    @Test
+    public void testConversionOutputSample() throws Exception {
+        List<Place> outputPlaces = placeResultsTransformer.apply(inputPlaces);
+
+        assertEquals("ChIJ_7gEN9FC1moRMFOPsdtieeE", outputPlaces.get(1).getId());
+        assertEquals("The Best Western Plus Travel Inn Hotel", outputPlaces.get(1).getName());
+        assertEquals(-37.8004586, outputPlaces.get(1).getLatitude());
+        assertEquals(144.9681022, outputPlaces.get(1).getLongitude());
+
+        assertEquals("ChIJgf0RD69C1moR4OeMIXVWBAU", outputPlaces.get(19).getId());
+        assertEquals("Melbourne", outputPlaces.get(19).getName());
+        assertEquals(-37.81361100000001, outputPlaces.get(19).getLatitude());
+        assertEquals(144.963056, outputPlaces.get(19).getLongitude());
     }
 
 }
