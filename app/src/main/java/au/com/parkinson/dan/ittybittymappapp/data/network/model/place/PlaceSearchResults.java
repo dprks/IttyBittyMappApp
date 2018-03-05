@@ -13,6 +13,10 @@ public class PlaceSearchResults {
     @SerializedName("results")
     @Expose
     private List<Result> results = null;
+    @SerializedName("next_page_token")
+    @Expose
+    private String nextPageToken = null;
+
 
     public List<Object> getHtmlAttributions() {
         return htmlAttributions;
@@ -30,4 +34,11 @@ public class PlaceSearchResults {
         this.results = results;
     }
 
+    public String getNextPageToken() {
+        return nextPageToken;
+    }
+
+    public void setNextPageToken(String nextPageToken) {
+        this.nextPageToken = nextPageToken;
+    }
 }
