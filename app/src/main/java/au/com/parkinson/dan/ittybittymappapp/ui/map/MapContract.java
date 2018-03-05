@@ -33,6 +33,8 @@ public interface MapContract {
     void showEmptySearchResult();
 
     void showErrorLoading(Throwable throwable);
+
+    void showLoadingIndicator();
   }
 
   interface Presenter extends BasePresenter {

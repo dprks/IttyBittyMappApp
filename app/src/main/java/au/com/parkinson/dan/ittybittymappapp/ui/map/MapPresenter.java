@@ -35,8 +35,10 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void loadPlaces(LatLong userLocation) {
+        view.clearMap();
+        view.showLoadingIndicator();
 
-        //Radius is hardcoded for simplicity
+        //Radius is hardcoded to maximum for simplicity
         Disposable disposable = placesRepository.getPlacesByLocation(userLocation, 50000)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -45,6 +47,7 @@ public class MapPresenter implements MapContract.Presenter {
                             view.showPointsOfInterest(places);
                             view.showUserLocation(userLocation);
                             view.showRoute(getRoute(userLocation, places));
+                            view.stopLoadingIndicator();
                         },
                         view::showErrorLoading,
                         this::loadRoute);
