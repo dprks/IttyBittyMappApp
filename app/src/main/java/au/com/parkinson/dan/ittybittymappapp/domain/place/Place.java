@@ -6,7 +6,7 @@ package au.com.parkinson.dan.ittybittymappapp.domain.place;
  * Created by dan on 3/03/2018.
  */
 
-public class Place {
+public class Place implements LatLong {
 
     private String id;
     private Double latitude;

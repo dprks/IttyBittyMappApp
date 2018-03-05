@@ -16,5 +16,5 @@ public interface PlaceRouter <T> {
      * @param inputPoints a list of points to route
      * @return the ordered output route
      */
-    List<T> route(T origin, List<T> inputPoints);
+    List<T> route(T origin, List<? extends T> inputPoints);
 }

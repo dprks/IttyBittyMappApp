@@ -1,6 +1,11 @@
 package au.com.parkinson.dan.ittybittymappapp.ui.map;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import au.com.parkinson.dan.ittybittymappapp.data.PlacesRepository;
+import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
+import au.com.parkinson.dan.ittybittymappapp.domain.route.NearestNeighbourRouter;
+import au.com.parkinson.dan.ittybittymappapp.domain.route.PlaceRouter;
 import dagger.Module;
 import dagger.Provides;
 
@@ -22,7 +27,12 @@ public class MapPresenterModule {
     }
 
     @Provides
-    public MapContract.Presenter providePresenter(PlacesRepository placesRepository, MapContract.View view) {
-        return new MapPresenter(placesRepository, view);
+    public MapContract.Presenter providePresenter(PlacesRepository placesRepository, MapContract.View view, PlaceRouter placeRouter) {
+        return new MapPresenter(placesRepository, view, placeRouter);
+    }
+
+    @Provides
+    public PlaceRouter providePlaceRouter() {
+        return new NearestNeighbourRouter();
     }
 }

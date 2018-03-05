@@ -1,7 +1,6 @@
 package au.com.parkinson.dan.ittybittymappapp;
 
 import com.google.gson.Gson;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,25 +10,24 @@ import java.util.List;
 
 import au.com.parkinson.dan.ittybittymappapp.data.PlaceResultsTransformer;
 import au.com.parkinson.dan.ittybittymappapp.data.adapter.GooglePlaceAdapter;
-import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceAdapter;
-import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceToLatlngAdapter;
+import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceToLatlongAdapter;
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.PlaceSearchResults;
-import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.Result;
-import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
+import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
+import au.com.parkinson.dan.ittybittymappapp.domain.place.Point;
 import au.com.parkinson.dan.ittybittymappapp.domain.route.NearestNeighbourRouter;
 import au.com.parkinson.dan.ittybittymappapp.sampleData.SampleJSON;
 
-import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static au.com.parkinson.dan.ittybittymappapp.domain.place.PlaceMaths.distanceBetween;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by dan on 5/03/2018.
  */
 public class NearestNeighbourRouterTest {
 
-    private LatLng origin = new LatLng(-37.801111, 144.978889);
+    private LatLong origin = new Point(-37.801111, 144.978889);
 
-    private List<LatLng> places;
+    private List<LatLong> places;
 
     private NearestNeighbourRouter router;
     private PlaceResultsTransformer placeResultsTransformer = new PlaceResultsTransformer(new GooglePlaceAdapter());
@@ -39,7 +37,7 @@ public class NearestNeighbourRouterTest {
 
         Gson gson = new Gson();
         PlaceSearchResults apiResults = gson.fromJson(SampleJSON.getPlacesJSON(), PlaceSearchResults.class);
-        places = new PlaceToLatlngAdapter().convert(placeResultsTransformer.apply(apiResults));
+        places = new PlaceToLatlongAdapter().convert(placeResultsTransformer.apply(apiResults));
     }
 
     /**
@@ -49,23 +47,24 @@ public class NearestNeighbourRouterTest {
     public void testConversion() {
         router = new NearestNeighbourRouter();
 
-        List<LatLng> originalPath = new ArrayList<>();
+        List<LatLong> originalPath = new ArrayList<>();
         originalPath.add(origin);
         originalPath.addAll(places);
         originalPath.add(origin);
 
-        List<LatLng> routedPath = router.route(origin, places);
+        List<LatLong> routedPath = router.route(origin, places);
 
         assertTrue(calculateLength(routedPath) <= calculateLength(originalPath));
     }
 
-    private double calculateLength(List<LatLng> path) {
+    private double calculateLength(List<LatLong> path) {
         double length = 0;
         for(int i = 0; i < path.size() - 1; i++) {
-            length += path.get(i).distanceTo(path.get(i + 1));
+            length += distanceBetween(path.get(i), path.get(i + 1));
         }
         return length;
-
     }
+
+
 
 }

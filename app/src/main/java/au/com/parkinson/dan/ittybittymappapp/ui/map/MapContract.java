@@ -4,6 +4,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 
 import java.util.List;
 
+import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 import au.com.parkinson.dan.ittybittymappapp.ui.presentation.BasePresenter;
 import au.com.parkinson.dan.ittybittymappapp.ui.presentation.BaseView;
@@ -17,13 +18,13 @@ public interface MapContract {
 
   interface View extends BaseView {
 
-    void showUserLocation(LatLng latLng);
+    void showUserLocation(LatLong latLng);
 
     void showPointsOfInterest(List<Place> pointsToAdd);
 
     void showPointOfInterestDetails(Place pointOfInterest);
 
-    void showRoute(List<LatLng> route);
+    void showRoute(List<LatLong> route);
 
     void clearMap();
 
