@@ -46,8 +46,6 @@ public interface MapContract {
 
     void loadPlaceDetails(String placeId);
 
-    void loadRoute();
-
   }
 
 }

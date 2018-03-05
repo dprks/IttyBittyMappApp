@@ -14,7 +14,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Map presenter
+ * Map presenter for managing data loading and formatting for Map Activity.
  *
  * Created by dan on 4/03/2018.
  */
@@ -39,29 +39,34 @@ public class MapPresenter implements MapContract.Presenter {
         view.showLoadingIndicator();
 
         //Radius is hardcoded to maximum for simplicity
+        //TODO change to a different API, as google places will not give us 100 results easily
         Disposable disposable = placesRepository.getPlacesByLocation(userLocation, 50000)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         places -> {
-                            view.showPointsOfInterest(places);
-                            view.showUserLocation(userLocation);
-                            view.showRoute(getRoute(userLocation, places));
-                            view.stopLoadingIndicator();
+                            sendResultsToMap(userLocation, places);
                         },
-                        view::showErrorLoading,
-                        this::loadRoute);
+                        view::showErrorLoading);
 
         disposables.add(disposable);
     }
 
-    @Override
-    public void loadPlaceDetails(String placeId) {
+    private void sendResultsToMap(LatLong userLocation, List<Place> places) {
+        if(places == null || places.size() <= 0) {
+            view.showEmptySearchResult();
 
+        } else {
+            view.showPointsOfInterest(places);
+            view.showRoute(getRoute(userLocation, places));
+        }
+
+        view.stopLoadingIndicator();
+        view.showUserLocation(userLocation);
     }
 
     @Override
-    public void loadRoute() {
+    public void loadPlaceDetails(String placeId) {
 
     }
 
