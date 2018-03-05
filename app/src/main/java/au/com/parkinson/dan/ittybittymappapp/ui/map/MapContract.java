@@ -1,5 +1,7 @@
 package au.com.parkinson.dan.ittybittymappapp.ui.map;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import java.util.List;
 
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
@@ -15,11 +17,13 @@ public interface MapContract {
 
   interface View extends BaseView {
 
+    void showUserLocation(LatLng latLng);
+
     void showPointsOfInterest(List<Place> pointsToAdd);
 
     void showPointOfInterestDetails(Place pointOfInterest);
 
-    void showRoute(List<Place> route);
+    void showRoute(List<LatLng> route);
 
     void clearMap();
 
@@ -27,7 +31,7 @@ public interface MapContract {
 
     void showEmptySearchResult();
 
-    void showErrorLoading();
+    void showErrorLoading(Throwable throwable);
   }
 
   interface Presenter extends BasePresenter {
