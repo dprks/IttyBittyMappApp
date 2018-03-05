@@ -10,9 +10,9 @@ import java.util.List;
 
 import au.com.parkinson.dan.ittybittymappapp.data.PlaceResultsTransformer;
 import au.com.parkinson.dan.ittybittymappapp.data.adapter.GooglePlaceAdapter;
-import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceToLatlongAdapter;
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.PlaceSearchResults;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
+import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Point;
 import au.com.parkinson.dan.ittybittymappapp.domain.route.NearestNeighbourRouter;
 import au.com.parkinson.dan.ittybittymappapp.sampleData.SampleJSON;
@@ -27,9 +27,10 @@ public class NearestNeighbourRouterTest {
 
     private LatLong origin = new Point(-37.801111, 144.978889);
 
-    private List<LatLong> places;
+    private List<Place> places;
 
     private NearestNeighbourRouter router;
+
     private PlaceResultsTransformer placeResultsTransformer = new PlaceResultsTransformer(new GooglePlaceAdapter());
 
     @Before
@@ -37,7 +38,7 @@ public class NearestNeighbourRouterTest {
 
         Gson gson = new Gson();
         PlaceSearchResults apiResults = gson.fromJson(SampleJSON.getPlacesJSON(), PlaceSearchResults.class);
-        places = new PlaceToLatlongAdapter().convert(placeResultsTransformer.apply(apiResults));
+        places = placeResultsTransformer.apply(apiResults);
     }
 
     /**

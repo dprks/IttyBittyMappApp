@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import au.com.parkinson.dan.ittybittymappapp.data.PlacesRepository;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
-import au.com.parkinson.dan.ittybittymappapp.domain.place.Point;
 import au.com.parkinson.dan.ittybittymappapp.domain.route.PlaceRouter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -35,15 +34,14 @@ public class MapPresenter implements MapContract.Presenter {
     }
 
     @Override
-    public void loadPlaces(Double latitude, Double longitude) {
+    public void loadPlaces(LatLong userLocation) {
 
         //Radius is hardcoded for simplicity
-        Disposable disposable = placesRepository.getPlacesByLocation(latitude , longitude, 50000)
+        Disposable disposable = placesRepository.getPlacesByLocation(userLocation, 50000)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         places -> {
-                            LatLong userLocation = new Point(latitude, longitude);
                             view.showPointsOfInterest(places);
                             view.showUserLocation(userLocation);
                             view.showRoute(getRoute(userLocation, places));

@@ -1,9 +1,11 @@
 package au.com.parkinson.dan.ittybittymappapp.domain.route;
 
-import com.mapbox.mapboxsdk.geometry.LatLng;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
+
+import static au.com.parkinson.dan.ittybittymappapp.domain.place.PlaceMaths.distanceBetween;
 
 /**
  * Creates a reasonably efficient route between points based on a nearest-neighbour algorithm
@@ -12,21 +14,21 @@ import java.util.List;
  * Created by dan on 4/03/2018.
  */
 
-public class NearestNeighbourRouter implements PlaceRouter <LatLng> {
+public class NearestNeighbourRouter implements PlaceRouter <LatLong> {
 
     @Override
-    public List<LatLng> route(LatLng origin, List<LatLng> inputPoints) {
+    public List<LatLong> route(LatLong origin, List<? extends LatLong> inputPoints) {
 
         int locationCount = inputPoints.size();
 
-        ArrayList<LatLng> outputRoute = new ArrayList<>();
+        ArrayList<LatLong> outputRoute = new ArrayList<>();
 
         //add origin to path
         outputRoute.add(origin);
 
         //Add locations to path
         for(int i = 0; i < locationCount; i ++) {
-            LatLng nearestNeighbour = getNearestNeighbour(outputRoute.get(i), inputPoints);
+            LatLong nearestNeighbour = getNearestNeighbour(outputRoute.get(i), inputPoints);
 
             inputPoints.remove(nearestNeighbour);
             outputRoute.add(nearestNeighbour);
@@ -39,13 +41,13 @@ public class NearestNeighbourRouter implements PlaceRouter <LatLng> {
     }
 
 
-    private LatLng getNearestNeighbour(LatLng origin, List<LatLng> neighbours) {
-        LatLng currentNearest = neighbours.get(0);
-        double currentNearness = origin.distanceTo(currentNearest);
+    private LatLong getNearestNeighbour(LatLong origin, List<? extends LatLong> neighbours) {
+        LatLong currentNearest = neighbours.get(0);
+        double currentNearness = distanceBetween(origin, neighbours.get(0));
 
-        for(LatLng neighbour : neighbours) {
+        for(LatLong neighbour : neighbours) {
 
-            double distanceToNeighbour = origin.distanceTo(neighbour);
+            double distanceToNeighbour =  distanceBetween(origin, neighbour);
 
             if(distanceToNeighbour <= currentNearness) {
                 currentNearest = neighbour;

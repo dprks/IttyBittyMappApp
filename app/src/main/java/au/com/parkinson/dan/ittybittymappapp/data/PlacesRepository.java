@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import au.com.parkinson.dan.ittybittymappapp.data.network.api.PlacesApi;
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.placeDetails.PlaceDetailsResults;
+import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;
 import io.reactivex.Observable;
 
@@ -30,8 +31,8 @@ public class PlacesRepository {
         this.placeTransformer = placeTransformer;
     }
 
-    public Observable<List<Place>> getPlacesByLocation(String location, int radius) {
-        return api.getPlacesByLocation(location, radius, null, apiKey).map(placeTransformer);
+    public Observable<List<Place>> getPlacesByLocation(LatLong location, int radius) {
+        return api.getPlacesByLocation(String.format("%s,%s", location.getLatitude(), location.getLongitude()), radius, null, apiKey).map(placeTransformer);
     }
 
     public Observable<PlaceDetailsResults> getPlaceDetails(String placeId) {

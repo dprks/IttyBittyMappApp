@@ -19,7 +19,7 @@ public interface PlacesApi {
     String BASE_URL = "https://maps.googleapis.com/maps/api/";
 
     @GET("place/nearbysearch/json")
-    Observable<PlaceSearchResults> getPlacesByLocation(@Query("location") String location, @Query("radius") int radius, @Query("key") String apiKey);
+    Observable<PlaceSearchResults> getPlacesByLocation(@Query("location") String location, @Query("radius") int radius, @Query("pagetoken") String pageToken, @Query("key") String apiKey);
 
     @GET("place/details/json")
     Observable<PlaceDetailsResults> getPlaceDetails(@Query("placeid") String placeId, @Query("key") String apiKey);

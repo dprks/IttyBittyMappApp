@@ -40,7 +40,7 @@ public interface MapContract {
     /**
      * load places of interest around user's location
      */
-    void loadPlaces(Double latitude, Double longitude);
+    void loadPlaces(LatLong userLocation);
 
     void loadPlaceDetails(String placeId);
 
