@@ -31,8 +31,8 @@ public class PlacesRepository {
         this.placeTransformer = placeTransformer;
     }
 
-    public Observable<List<Place>> getPlacesByLocation(LatLong location, int radius) {
-        return api.getPlacesByLocation(String.format("%s,%s", location.getLatitude(), location.getLongitude()), radius, null, apiKey).map(placeTransformer);
+    public Observable<List<Place>> getPlacesByLocation(LatLong location, String pageToken, int radius) {
+        return api.getPlacesByLocation(String.format("%s,%s", location.getLatitude(), location.getLongitude()), radius, pageToken, apiKey).map(placeTransformer);
     }
 
     public Observable<PlaceDetailsResults> getPlaceDetails(String placeId) {

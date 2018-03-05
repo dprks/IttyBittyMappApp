@@ -40,7 +40,7 @@ public class MapPresenter implements MapContract.Presenter {
 
         //Radius is hardcoded to maximum for simplicity
         //TODO change to a different API, as google places will not give us 100 results easily
-        Disposable disposable = placesRepository.getPlacesByLocation(userLocation, 50000)
+        Disposable disposable = placesRepository.getPlacesByLocation(userLocation, null, 50000)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
