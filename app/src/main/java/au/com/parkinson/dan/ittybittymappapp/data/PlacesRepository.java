@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceResultsTransformer;
 import au.com.parkinson.dan.ittybittymappapp.data.network.api.PlacesApi;
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.placeDetails.PlaceDetailsResults;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;

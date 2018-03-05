@@ -1,4 +1,4 @@
-package au.com.parkinson.dan.ittybittymappapp.data;
+package au.com.parkinson.dan.ittybittymappapp.data.adapter;
 
 import android.support.annotation.NonNull;
 

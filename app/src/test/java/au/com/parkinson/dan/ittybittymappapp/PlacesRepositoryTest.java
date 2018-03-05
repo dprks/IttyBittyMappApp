@@ -12,11 +12,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static org.mockito.Mockito.*;
 
-import au.com.parkinson.dan.ittybittymappapp.data.PlaceResultsTransformer;
+import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceResultsTransformer;
 import au.com.parkinson.dan.ittybittymappapp.data.PlacesRepository;
 import au.com.parkinson.dan.ittybittymappapp.data.adapter.GooglePlaceAdapter;
 import au.com.parkinson.dan.ittybittymappapp.data.network.api.PlacesApi;

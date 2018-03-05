@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import au.com.parkinson.dan.ittybittymappapp.data.PlaceResultsTransformer;
+import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceResultsTransformer;
 import au.com.parkinson.dan.ittybittymappapp.data.adapter.GooglePlaceAdapter;
 import au.com.parkinson.dan.ittybittymappapp.data.network.model.place.PlaceSearchResults;
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place;

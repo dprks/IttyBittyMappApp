@@ -2,6 +2,7 @@ package au.com.parkinson.dan.ittybittymappapp.data;
 
 import javax.inject.Singleton;
 
+import au.com.parkinson.dan.ittybittymappapp.data.adapter.PlaceResultsTransformer;
 import au.com.parkinson.dan.ittybittymappapp.data.network.api.PlacesApi;
 import dagger.Module;
 import dagger.Provides;

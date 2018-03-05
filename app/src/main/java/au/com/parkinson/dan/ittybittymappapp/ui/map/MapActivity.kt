@@ -1,4 +1,4 @@
-package au.com.parkinson.dan.ittybittymappapp.ui
+package au.com.parkinson.dan.ittybittymappapp.ui.map
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -16,9 +16,6 @@ import au.com.parkinson.dan.ittybittymappapp.R
 import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Place
 import au.com.parkinson.dan.ittybittymappapp.domain.place.Point
-import au.com.parkinson.dan.ittybittymappapp.ui.map.DaggerMapComponent
-import au.com.parkinson.dan.ittybittymappapp.ui.map.MapContract
-import au.com.parkinson.dan.ittybittymappapp.ui.map.MapPresenterModule
 import com.google.android.gms.location.LocationServices
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.annotations.IconFactory
