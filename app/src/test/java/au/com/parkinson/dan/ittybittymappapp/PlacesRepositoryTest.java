@@ -32,7 +32,9 @@ public class PlacesRepositoryTest {
     private String key = "08971230487120349871230487";
     private String pageToken = "0adsfadsfklfds";
 
-    private String location = "";
+    private int latitude;
+    private int longitude;
+
     private int radius = 4000;
 
 
@@ -58,11 +60,11 @@ public class PlacesRepositoryTest {
 
         Observable <ArrayList<Place>> observable = Observable.just(new ArrayList<Place>());
 
-        Mockito.doReturn(observable).when(apiService).getPlacesByLocation(location, radius, pageToken, key);
+        Mockito.doReturn(observable).when(apiService).getPlacesByLocation(latitude + "," + longitude, radius, pageToken, key);
 
-        placesRepository.getPlacesByLocation(location, radius);
+        placesRepository.getPlacesByLocation(latitude, longitude, radius);
 
-        verify(apiService).getPlacesByLocation(location, radius, pageToken, key);
+        verify(apiService).getPlacesByLocation(latitude + "," + longitude, radius, pageToken, key);
     }
 
 }
