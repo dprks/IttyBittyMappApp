@@ -22,6 +22,7 @@ import au.com.parkinson.dan.ittybittymappapp.ui.map.MapPresenterModule
 import com.google.android.gms.location.LocationServices
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.annotations.IconFactory
+import com.mapbox.mapboxsdk.annotations.Marker
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.annotations.PolylineOptions
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
@@ -32,12 +33,20 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.activity_map.*
 import javax.inject.Inject
 
+/**
+ * MapActivity
+ *
+ * Maintains a mapbox map, and is fed point and route data from a Presenter.
+ */
 class MapActivity : MapContract.View, AppCompatActivity(), OnMapReadyCallback {
 
     @Inject
     lateinit var mapPresenter: MapContract.Presenter
 
     private var mapboxMap: MapboxMap? = null
+
+    //Maps marker IDs to a place object, for click handling
+    private var markerMap = HashMap<Long?, Place>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,9 +77,23 @@ class MapActivity : MapContract.View, AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(mapboxMap: MapboxMap?) {
         this.mapboxMap = mapboxMap
+
+        //fetch further details on marker info window click
+        this.mapboxMap?.setOnInfoWindowClickListener{onInfoWindowClicked(it)}
         checkLocationPermission()
     }
 
+    /**
+     * On marker info window click
+     */
+    fun onInfoWindowClicked(marker: Marker) : Boolean {
+        //TODO implement fetch further details
+        return true
+    }
+
+    /**
+     * Starts the loading process in the presenter
+     */
     private fun fetchPlacesForLocation(it: Location) {
         mapPresenter.loadPlaces(Point(it.latitude, it.longitude))
     }
@@ -93,13 +116,15 @@ class MapActivity : MapContract.View, AppCompatActivity(), OnMapReadyCallback {
 
         val pointsOfInterest = ArrayList<LatLng>()
 
-        for(place in pointsToAdd) {
+        for (place in pointsToAdd) {
             pointsOfInterest.add(LatLng(place.latitude, place.longitude))
 
-            mapboxMap?.addMarker(MarkerOptions()
+            val marker = mapboxMap?.addMarker(MarkerOptions()
                     .position(LatLng(place.latitude, place.longitude))
                     .title(place.name)
-                    .snippet(place.name))
+                    .snippet("User rating: " + place.rating))
+
+            markerMap[marker?.id] = place
         }
 
         zoomToExtent(pointsOfInterest)
@@ -119,9 +144,7 @@ class MapActivity : MapContract.View, AppCompatActivity(), OnMapReadyCallback {
 
         val pointsOfInterest = ArrayList<LatLng>()
 
-        for(place in route) {
-            pointsOfInterest.add(LatLng(place.latitude, place.longitude))
-        }
+        route.mapTo(pointsOfInterest) { LatLng(it.latitude, it.longitude) }
 
         mapboxMap?.addPolyline(PolylineOptions()
                 .addAll(pointsOfInterest)
@@ -129,12 +152,16 @@ class MapActivity : MapContract.View, AppCompatActivity(), OnMapReadyCallback {
                 .width(3f))
     }
 
+    /**
+     * Displays point of interest details
+     */
     override fun showPointOfInterestDetails(pointOfInterest: Place?) {
-
+        //TODO - use info window click to fetch more detailed information
     }
 
     override fun clearMap() {
         mapboxMap?.clear()
+        markerMap.clear()
     }
 
     override fun showLoadingIndicator() {

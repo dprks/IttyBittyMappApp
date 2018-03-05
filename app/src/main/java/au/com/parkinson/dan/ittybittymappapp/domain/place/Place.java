@@ -12,6 +12,7 @@ public class Place implements LatLong {
     private Double latitude;
     private Double longitude;
     private String name;
+    private double rating;
 
 
     public void setId(String id) {
@@ -44,5 +45,13 @@ public class Place implements LatLong {
 
     public Double getLongitude() {
         return longitude;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public double getRating() {
+        return rating;
     }
 }

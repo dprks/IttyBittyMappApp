@@ -31,6 +31,7 @@ public class GooglePlaceAdapter implements PlaceAdapter<Result> {
 
         outputPlace.setId(input.getPlaceId());
         outputPlace.setName(input.getName());
+        outputPlace.setRating(input.getRating());
         outputPlace.setLatitude(input.getGeometry().getLocation().getLat());
         outputPlace.setLongitude(input.getGeometry().getLocation().getLng());
 
