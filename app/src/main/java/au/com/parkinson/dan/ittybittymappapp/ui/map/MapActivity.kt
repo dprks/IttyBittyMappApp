@@ -70,6 +70,7 @@ class MapActivity : MapContract.View, AppCompatActivity(), OnMapReadyCallback {
                 .placesRepositoryComponent((application as MapApplication).repositoryComponent)
                 .build()
                 .inject(this)
+        mapPresenter.onAttach()
     }
 
     override fun onMapReady(mapboxMap: MapboxMap?) {
@@ -229,6 +230,45 @@ class MapActivity : MapContract.View, AppCompatActivity(), OnMapReadyCallback {
         LocationServices.getFusedLocationProviderClient(this)
                 ?.lastLocation
                 ?.addOnSuccessListener(this, { fetchPlacesForLocation(it) })
+    }
+
+    /*
+     * Lifecycle methods
+     */
+    public override fun onStart() {
+        super.onStart()
+        mapView!!.onStart()
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        mapView!!.onResume()
+    }
+
+    public override fun onPause() {
+        super.onPause()
+        mapView!!.onPause()
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        mapView!!.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView!!.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView!!.onDestroy()
+        mapPresenter.onDetach()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        mapView!!.onSaveInstanceState(outState!!)
     }
 
 }
