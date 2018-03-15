@@ -1,7 +1,5 @@
 package au.com.parkinson.dan.ittybittymappapp.ui.map;
 
-import com.mapbox.mapboxsdk.geometry.LatLng;
-
 import java.util.List;
 
 import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;

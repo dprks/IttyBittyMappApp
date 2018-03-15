@@ -1,9 +1,6 @@
 package au.com.parkinson.dan.ittybittymappapp.ui.map;
 
-import com.mapbox.mapboxsdk.geometry.LatLng;
-
 import au.com.parkinson.dan.ittybittymappapp.data.PlacesRepository;
-import au.com.parkinson.dan.ittybittymappapp.domain.place.LatLong;
 import au.com.parkinson.dan.ittybittymappapp.domain.route.NearestNeighbourRouter;
 import au.com.parkinson.dan.ittybittymappapp.domain.route.PlaceRouter;
 import dagger.Module;
